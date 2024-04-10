@@ -1,9 +1,7 @@
-﻿using CustomUserIdentityApp.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CustomUserIdentityApp.Data;
+namespace CustomUserIdentityApp.Areas.Identity.Data;
 
 public class CustomUserIdentityAppContext : IdentityDbContext<CustomAppUser>
 {
