@@ -9,6 +9,9 @@ namespace CustomUserIdentityApp.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the CustomAppUser class
 public class CustomAppUser : IdentityUser
 {
-    
+    [PersonalData]
+    public string? Name { get; set; }
+    [PersonalData]
+    public DateTime? DOB { get; set; }
 }
 
