@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CustomUserIdentityApp.Areas.Identity.Data;
 
-public class CustomUserIdentityAppContext : IdentityDbContext<CustomAppUser>
+public class CustomUserIdentityAppContext : IdentityDbContext<ApplicationUser>
 {
     public CustomUserIdentityAppContext(DbContextOptions<CustomUserIdentityAppContext> options)
         : base(options)
