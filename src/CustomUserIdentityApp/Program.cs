@@ -17,6 +17,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
+    // Default SignIn settings.
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    
     // Password settings.
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -35,6 +39,9 @@ builder.Services.Configure<IdentityOptions>(options =>
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = false;
 });
+
+builder.Services.Configure<SecurityStampValidatorOptions>(o => 
+    o.ValidationInterval = TimeSpan.FromMinutes(1));
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
