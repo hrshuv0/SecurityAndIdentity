@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomUserIdentityApp.Areas.Identity.Data;
@@ -16,6 +17,8 @@ public class CustomUserIdentityAppContext : IdentityDbContext<ApplicationUser, A
         
         modelBuilder.Entity<ApplicationUser>(b =>
         {
+            b.ToTable("CoreUsers");
+            
             // Each User can have many UserClaims
             b.HasMany(e => e.Claims)
                 .WithOne(e => e.User)
@@ -43,6 +46,8 @@ public class CustomUserIdentityAppContext : IdentityDbContext<ApplicationUser, A
 
         modelBuilder.Entity<ApplicationRole>(b =>
         {
+            b.ToTable("CoreRoles");
+            
             // Each Role can have many entries in the UserRole join table
             b.HasMany(e => e.UserRoles)
                 .WithOne(e => e.Role)
@@ -54,6 +59,32 @@ public class CustomUserIdentityAppContext : IdentityDbContext<ApplicationUser, A
                 .WithOne(e => e.Role)
                 .HasForeignKey(rc => rc.RoleId)
                 .IsRequired();
+        });
+        
+
+        modelBuilder.Entity<IdentityUserClaim<long>>(b =>
+        {
+            b.ToTable("CoreUserClaims");
+        });
+
+        modelBuilder.Entity<IdentityUserLogin<long>>(b =>
+        {
+            b.ToTable("CoreUserLogins");
+        });
+
+        modelBuilder.Entity<IdentityUserToken<long>>(b =>
+        {
+            b.ToTable("CoreUserTokens");
+        });
+
+        modelBuilder.Entity<IdentityRoleClaim<long>>(b =>
+        {
+            b.ToTable("CoreRoleClaims");
+        });
+
+        modelBuilder.Entity<IdentityUserRole<long>>(b =>
+        {
+            b.ToTable("CoreUserRoles");
         });
     }
 }
