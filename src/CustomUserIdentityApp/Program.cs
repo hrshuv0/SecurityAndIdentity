@@ -6,8 +6,10 @@ var connectionString = builder.Configuration.GetConnectionString("CustomUserIden
 
 builder.Services.AddDbContext<CustomUserIdentityAppContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CustomUserIdentityAppContext>();
-
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<CustomUserIdentityAppContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
 
 // Add services to the container.
